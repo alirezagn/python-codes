@@ -1,0 +1,22 @@
+def solution(N):
+    binary_rep = bin(N)[2:]
+    
+    # Initialize variables to track the current gap length and the maximum gap
+    max_gap = 0
+    current_gap = 0
+    in_gap = False  
+    
+    for bit in binary_rep:
+        if bit == '1':
+            if in_gap:
+                # If we are in a gap and encounter a '1', update max_gap
+                max_gap = max(max_gap, current_gap)
+            # Reset the current gap and start looking for the next gap
+            current_gap = 0
+            in_gap = True
+        elif bit == '0' and in_gap:
+            # Increment gap length if we are inside a gap
+            current_gap += 1
+    
+    return max_gap
+    pass
